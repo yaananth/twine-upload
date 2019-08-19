@@ -35,7 +35,7 @@ async function run() {
     writePypirc();
 
     // Upload
-    await exec.exec(`twine upload --config-file "${PypircPath}" ${runner.temp}/* --skip-existing`);  
+    await exec.exec(`twine upload --config-file "${PypircPath}" ${runner.temp}/*.tar.gz --skip-existing`);  
   } catch (error) {
     core.setFailed(error.message);
   }
