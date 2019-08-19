@@ -26,7 +26,7 @@ async function run() {
   try {
     // Install dependencies
     await exec.exec('python -m pip install pip twine');
-    await exec.exec('pip install -r requirements.txt');
+    await exec.exec('python -m pip install -r requirements.txt');
 
     // Package
     await exec.exec(`python setup.py sdist --dist-dir ${runner.temp}`);  
