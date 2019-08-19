@@ -4,8 +4,8 @@ import * as fs from "fs";
 import * as path from "path";
 
 // These are added run actions using "env:"
-let runner: IRunnerContext = JSON.parse(process.env.Runner || "");
-let secrets: ISecretsContext = JSON.parse(process.env.Secrets || "");
+let runner: IRunnerContext = JSON.parse(process.env.RUNNER || "");
+let secrets: ISecretsContext = JSON.parse(process.env.SECRETS || "");
 
 const PypircName = "twineghubaction.pypirc";
 const PypircPath =path.join(runner.workspace, PypircName);
