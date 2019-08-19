@@ -1,4 +1,23 @@
 # Twine upload
+## Usage
+Set up [secrets](https://developer.github.com/actions/managing-workflows/storing-secrets/)
+```
+name: Upload python to twine
+
+on: [pull_request]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: yaananth/twine-upload@v1
+      env:
+        RUNNER: ${{ toJson(runner) }}
+        SECRETS: ${{ toJson(secrets) }}
+
+```
+
 
 This github action upload a python project to pip using twine.
 
@@ -17,6 +36,7 @@ git push origin v1
 ```
 ## Updating tag
 ```
+git checkout tags/v1 -b testtv1
 npm run build
 git commit -am "update"
 git tag -fa v1 -m "Update v1 tag"
