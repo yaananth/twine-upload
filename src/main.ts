@@ -34,6 +34,7 @@ async function run() {
     // Create necessary config for twine
     writePypirc();
 
+
     // Upload
     await exec.exec(`twine upload -r nimport --config-file "${PypircPath}" ${runner.temp}/* --skip-existing`);  
   } catch (error) {
@@ -44,11 +45,11 @@ async function run() {
 function writePypirc() {
   const pypricContents = `
   [distutils]
-    index-servers=
-      ${core.getInput('repo')}
+  index-servers=
+  ${core.getInput('repo')}
   [pypi]
-      username: ${secrets.username}
-      password: ${secrets.password}
+  username=${secrets.username}
+  password=${secrets.password}
   `;
   try {
     fs.writeFileSync(PypircPath, pypricContents);
