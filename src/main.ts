@@ -34,11 +34,8 @@ async function run() {
     // Create necessary config for twine
     writePypirc();
 
-    // Check
-    await exec.exec(`cat ${PypircPath}`);
-
     // Upload
-    await exec.exec(`twine upload -r nimport --config-file "${PypircPath}" ${runner.temp}/* --skip-existing`);  
+    await exec.exec(`twine upload --config-file "${PypircPath}" ${runner.temp}/* --skip-existing`);  
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -47,7 +44,7 @@ async function run() {
 function writePypirc() {
   const pypricContents = `
 [distutils]
-index-servers=${core.getInput('repo')}
+index-servers=pypi
 [pypi]
 username=${secrets.username}
 password=${secrets.password}
