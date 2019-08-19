@@ -3,9 +3,12 @@ import * as exec from'@actions/exec';
 import * as fs from "fs";
 import * as path from "path";
 
+// These are added run actions using "env:"
+let runner: IRunnerContext = JSON.parse(process.env.Runner || "");
+let secrets: ISecretsContext = JSON.parse(process.env.Secrets || "");
 
 const PypircName = "twineghubaction.pypirc";
-const getPypircPath = (root: string) => path.join(root, PypircName);
+const PypircPath =path.join(runner.workspace, PypircName);
 
 interface IRunnerContext {
   os: string;
@@ -21,37 +24,34 @@ interface ISecretsContext {
 
 async function run() {
   try {
-    const runnerContext: IRunnerContext = JSON.parse(process.env.RUNNER_CONTEXT || "");
     // Install dependencies
     await exec.exec('python -m pip install --upgrade pip twine');
     await exec.exec('pip install -r requirements.txt');
 
     // Package
-    await exec.exec(`python setup.py sdist --dist-dir ${runnerContext.temp}`);  
+    await exec.exec(`python setup.py sdist --dist-dir ${runner.temp}`);  
 
     // Create necessary config for twine
-    writePypirc(runnerContext);
+    writePypirc();
 
     // Upload
-    const configPath = getPypircPath(runnerContext.workspace);
-    await exec.exec(`twine upload -r nimport --config-file "${configPath}" ${runnerContext.temp}/* --skip-existing`);  
+    await exec.exec(`twine upload -r nimport --config-file "${PypircPath}" ${runner.temp}/* --skip-existing`);  
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-function writePypirc(runnerContext: IRunnerContext) {
-  const secretsContext: ISecretsContext = JSON.parse(process.env.SECRETS_CONTEXT || "");
+function writePypirc() {
   const pypricContents = `
   [distutils]
     index-servers=
       ${core.getInput('repo')}
   [pypi]
-      username: ${secretsContext.username}
-      password: ${secretsContext.password}
+      username: ${secrets.username}
+      password: ${secrets.password}
   `;
   try {
-    fs.writeFileSync(getPypircPath(runnerContext.workspace), pypricContents);
+    fs.writeFileSync(PypircPath, pypricContents);
   }
   catch(error) {
     core.setFailed(error.message);
