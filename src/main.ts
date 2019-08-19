@@ -25,7 +25,7 @@ interface ISecretsContext {
 async function run() {
   try {
     // Install dependencies
-    await exec.exec('python -m pip install --upgrade pip twine');
+    await exec.exec('python -m pip install pip twine');
     await exec.exec('pip install -r requirements.txt');
 
     // Package
