@@ -34,6 +34,8 @@ async function run() {
     // Create necessary config for twine
     writePypirc();
 
+    // Check
+    await exec.exec(`cat ${PypircPath}`);
 
     // Upload
     await exec.exec(`twine upload -r nimport --config-file "${PypircPath}" ${runner.temp}/* --skip-existing`);  
