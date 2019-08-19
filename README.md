@@ -4,7 +4,7 @@ Set up [secrets](https://developer.github.com/actions/managing-workflows/storing
 ```
 name: Upload python to twine
 
-on: [pull_request]
+on: [push]
 
 jobs:
   upload:
