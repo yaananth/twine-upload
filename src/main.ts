@@ -29,7 +29,7 @@ async function run() {
     await exec.exec('python -m pip install -r requirements.txt');
 
     // Package
-    await exec.exec(`python setup.py sdist --dist-dir ${runner.temp}`);  
+    await exec.exec(`sudo python setup.py sdist --dist-dir ${runner.temp}`);  
 
     // Create necessary config for twine
     writePypirc();
