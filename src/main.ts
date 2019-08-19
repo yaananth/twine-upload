@@ -25,8 +25,8 @@ interface ISecretsContext {
 async function run() {
   try {
     // Install dependencies
-    await exec.exec('python -m pip install pip twine');
-    await exec.exec('python -m pip install -r requirements.txt');
+    await exec.exec('sudo python -m pip install pip twine');
+    await exec.exec('sudo python -m pip install -r requirements.txt');
 
     // Package
     await exec.exec(`sudo python setup.py sdist --dist-dir ${runner.temp}`);  
