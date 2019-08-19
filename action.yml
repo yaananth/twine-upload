@@ -1,10 +1,10 @@
-name: 'Node 12 Template Action'
-description: 'Get started with Node actions'
-author: 'GitHub'
+name: 'twine-upload'
+description: 'Upload to twine'
+author: 'yaananth'
 inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+  repo:
+    description: 'The repository (package index) to upload the package to.'
+    default: ''
 runs:
   using: 'node12'
   main: 'lib/main.js'
