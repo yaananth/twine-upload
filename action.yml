@@ -1,8 +1,9 @@
 name: 'twine-upload'
 description: 'Upload to twine'
 author: 'yaananth'
-icon: 'upload'
-color: 'orange'
+branding:
+  icon: 'upload'
+  color: 'orange'
 runs:
   using: 'node12'
   main: 'lib/main.js'
