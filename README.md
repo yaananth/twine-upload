@@ -4,7 +4,11 @@ Set up `username` and `password` [secrets](https://developer.github.com/actions/
 ```
 name: Upload python to twine
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
+    - releases/*
 
 jobs:
   upload:
