@@ -3,10 +3,6 @@ description: 'Upload to twine'
 author: 'yaananth'
 icon: 'upload'
 color: 'orange'
-inputs: 
-  repo:
-    description: 'The repository (package index) to upload the package to.'
-    default: ''
 runs:
   using: 'node12'
   main: 'lib/main.js'
