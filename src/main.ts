@@ -18,8 +18,7 @@ interface IRunnerContext {
 }
 
 interface ISecretsContext {
-  username: string;
-  password: string;
+  token: string;
 }
 
 async function run() {
@@ -46,8 +45,8 @@ function writePypirc() {
 [distutils]
 index-servers=pypi
 [pypi]
-username=${secrets.username}
-password=${secrets.password}
+username=__token__
+password=${secrets.token}
 `;
   try {
     fs.writeFileSync(PypircPath, pypricContents);

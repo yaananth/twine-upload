@@ -1,6 +1,6 @@
 # Twine upload
 ## Usage
-**Don't forget!** Set up `username` and `password` [secrets](https://developer.github.com/actions/managing-workflows/storing-secrets/) for the [pip account](https://pypi.org/account/login/)
+**Don't forget!** Set up `token` [secret](https://developer.github.com/actions/managing-workflows/storing-secrets/) for the [pip account](https://pypi.org/account/login/). See [how to set pip token](https://pypi.org/help/#apitoken)
 ```
 name: Upload python to twine
 
